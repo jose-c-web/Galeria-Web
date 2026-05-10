@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de sites</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="Catalogo de Sites/style.css" />
+
+</head>
+<body>
+
+<header>
+  <h1>WEB<br>Gallery</h1>
+  <p>Uma indexação refinada de ferramentas e experiências digitais de vanguarda.</p>
+</header>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Buscar indexação..." autocomplete="off"/>
+  <select id="filter">
+    <option value="all">Todos</option>
+    <option value="design">Design</option>
+    <option value="dev">TI</option>
+    <option value="games">Jogos</option>
+    <option value="audio">Áudio</option>
+    <option value="educacao">Educação</option>
+    <option value="util">Utilidades</option>
+    <option value="RPG">RPG</option>
+    <option value="diversao">Diversão</option>
+  </select>
+</div>
+
+<main class="grid" id="grid"></main>
+
+<footer>
+  Sistema de Indexação v1.0 | © 2077 Nexus Corp.
+</footer>
+
+<script>
+  const sites = [
+    {name:'Sweezy Cursors', url:'https://sweezy-cursors.com/',  tag:'design', desc:'Coleção de cursores animados e personalizáveis para sites e projetos digitais.'},
+    {name:'Bardfy', url:'https://bardfy.com/',                  tag:'audio', desc:'Plataforma de aprendizado de programação com exercícios práticos e feedback instantâneo.'},
+    {name:'Ficha Epic', url:'https://ficha.epicorpg.com.br/',   tag:'RPG', desc:'Gerador de fichas para RPG, com suporte a diversos sistemas e personalização.'}, 
+    {name:'Crktr', url:'https://crktr.com/',                    tag:'RPG', desc:'Gerador de personagens para RPG, com opções de personalização e exportação.'},
+    {name:'ElisWorld', url:'https://elisworld.tv/',             tag:'diversao', desc:'Plataforma de streaming de filmes e séries, com uma interface simples e sem anúncios.'},
+    {name:'Wand', url:'https://wand.com/pt',                    tag:'games', desc:'Jogo de aventura e exploração em mundo aberto, com foco em narrativa e arte.'},
+    {name:'Lofi.cafe', url:'https://lofi.cafe/',                tag:'audio', desc:'Músicas lo-fi relaxantes para estudar, trabalhar ou relaxar.'},
+    {name:'Vidbox', url:'https://vidbox.cc/home',               tag:'diversao', desc:'Plataforma de streaming de vídeos curtos, com foco em conteúdo criativo e inspirador.'},
+    {name:'Anker Games', url:'https://ankergames.net/',         tag:'games', desc:'Jogos indie gratuitos e de alta qualidade, com foco em narrativa e arte.'},
+    {name:'Adescargar', url:'https://adescargar.net/',          tag:'util', desc:'Site para baixar jogos de PC, com uma ampla variedade de títulos disponíveis para download gratuito.'},
+    {name:'ShaderGradient', url:'https://shadergradient.co',    tag:'design', desc:'Cria fundos animados com partículas e gradientes coloridos em WebGL.'},
+    {name:'Moewalls', url:'https://moewalls.com',               tag:'design', desc:'Wallpapers animados e estáticos, focado em estética gamer/anime.'},
+    {name:'PlanYourRoom', url:'https://planyourroom.com',       tag:'util', desc:'Planejamento de ambientes com móveis em escala real.'},
+    {name:'Cursify', url:'https://cursify.com',                 tag:'educacao', desc:'Plataforma para criação e venda de cursos online.'},
+    {name:'HomeByMe', url:'https://home.by.me',                 tag:'util', desc:'Design de interiores em 3D direto no navegador.'},
+    {name:'Anime.js', url:'https://animejs.com',                tag:'dev', desc:'Biblioteca JavaScript para animações complexas e suaves.'},
+    {name:'Deifted', url:'https://drifted.com',                 tag:'games', desc:'Jogo de corrida e exploração em mundo aberto, com foco em direção e personalização de veículos.'},
+    {name:'Funes Word', url:'https://funes.word',               tag:'games', desc:'Jogo de palavras e lógica.'},
+    {name:'Murdle', url:'https://murdle.com',                   tag:'games', desc:'Jogo diário de mistério e dedução.'},
+    {name:'MotionBGS', url:'https://motionbgs.com',             tag:'design', desc:'Fundos animados para sites e projetos visuais.'},
+    {name:'Coddy', url:'https://coddy.tech',                    tag:'dev', desc:'Aprendizado interativo de programação.'},
+    {name:'iFixit', url:'https://ifixit.com',                   tag:'util', desc:'Guias de reparo e desmontagem de eletrônicos.'},
+    {name:'Planner5D', url:'https://planner5d.com',             tag:'util', desc:'Planejamento e design de casas em 2D e 3D.'},
+    {name:'VocalRemover', url:'https://vocalremover.com',       tag:'audio', desc:'Remove vocais ou instrumentos de músicas com IA.'},
+    {name:'Rocket.new', url:'https://rocket.new',               tag:'dev', desc:'Criação rápida de projetos e protótipos.'},
+    {name:'HookTheory', url:'https://hooktheory.com',           tag:'audio', desc:'Teoria musical aplicada e análise de músicas.'},
+    {name:'CodeDex', url:'https://codedex.com',                 tag:'educacao', desc:'Cursos de programação em formato gamificado.'},
+    {name:'8BitDash', url:'https://8bitdash.com',               tag:'design', desc:'Editor de pixel art online, ideal para criação de sprites e animações em pixel.'},
+    {name:'EmulatorOnline', url:'https://emulatoronline.com',   tag:'games', desc:'Emulador de consoles direto no navegador.'},
+    {name:'PaperAnimator', url:'https://paperanimator.com',     tag:'design', desc:'Criação de animações estilo recorte de papel.'},
+    {name:'SlowRoads', url:'https://slowroads.com',             tag:'games', desc:'Simulador relaxante de direção procedural.'},
+    {name:'Townscaper', url:'https://townscaper.com',           tag:'games', desc:'Construção criativa de cidades sem objetivos fixos.'},
+    {name:'EpidemicSound', url:'https://www.epidemicsound.com', tag:'audio', desc:'audios sonoros para edições e complementos'},
+    {name:'Incompetch', url:'https://incompetech.com/',         tag:'audio',  desc:'audios sonoros para edições e complementos'},
+    {name:'Arena.AI', url:'https://arena.ai/text/direct',       tag:'educacao',  desc:'IAs grátis para aprendizado e experimentação'},
+    {name:'Emulador de Jogos', url:'https://rec0ded88.com/',    tag:'games',  desc:'Emulador de jogos retro direto no navegador, sem necessidade de instalação.'},
+    {name:'VVD World', url:'https://vvd.world/',                tag:'games',  desc:'Jogo de exploração e construção em mundo aberto, com foco em criatividade e comunidade.'},
+    {name:'EmojiCombos', url:'https://emojicombos.com/cute',    tag:'util',  desc:'Coleção de combinações de emojis para usar em redes sociais, mensagens e mais.'},
+    {name:'Cosmos', url:'https://www.cosmos.so/',               tag:'design',  desc:'Plataforma de design colaborativo para criação de interfaces e protótipos.'},
+    {name:'Photopea', url:'https://www.photopea.com/',          tag:'design',  desc:'Editor de imagens online, compatível com formatos PSD, AI e Sketch.'},
+    {name:'TerrainK', url:'https://terraink.app/',              tag:'games',  desc:'Gerador de terrenos e mapas para jogos, com opções de personalização e exportação.'},
+    {name:'Replit', url:'https://replit.com/~',                 tag:'games',  desc:'IA utilizada para criar jogos e projetos interativos diretamente no navegador, com suporte a várias linguagens de programação.'},
+    {name:'Exercism', url:'https://exercism.org/',              tag:'dev',  desc:'Plataforma de prática de programação com exercícios e mentorias em várias linguagens.'},
+    {name:'PaperMau', url:'https://papermau.blogspot.com/',     tag:'util',  desc:'Blog com tutoriais e recursos para modelagem 3D em papel, ideal para hobbyistas e educadores.'},
+    {name:'Piskel', url:'https://www.piskelapp.com/',           tag:'design',  desc:'Editor de pixel art online, ideal para criação de sprites e animações em pixel.'},
+    {name:'Dverso', url:'https://tools.dverso.io/bgremove/',    tag:'dev',  desc:'Ferramenta de remoção de fundo de imagens usando inteligência artificial, fácil de usar e gratuita.'},
+    {name:'Blueprint', url:'https://www.blueprint.am/',         tag:'dev',  desc:'Ambiente de desenvolvimento online para projetos de software, com suporte a várias linguagens e colaboração em tempo real.'},
+    {name:'Savee', url:'https://savee.com/',                    tag:'design',  desc:'Ferramenta para pesquisa de design e inspiração visual, com curadoria de imagens de alta qualidade.'},
+    {name:'Swichy', url:'https://www.swishy.ai/',               tag:'design',  desc:'IA para criação de imagens e arte digital, com foco em personalização e controle criativo.'},
+    {name:'PaperMe', url:'https://paperme.pixzens.com/pt',      tag:'educacao',  desc:'Site para imprimir qualquer tipo de papel, desde pautado até quadriculado, pontilhado e mais.'}
+  ];
+  const grid = document.getElementById('grid');
+  const searchInput = document.getElementById('search');
+  const filterSelect = document.getElementById('filter');
+
+  // 2. LÓGICA DE RENDERIZAÇÃO
+  function render() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const selectedTag = filterSelect.value;
+
+    const filtered = sites.filter(({ name, desc, tag }) => {
+      const matchesTag = selectedTag === 'all' || tag === selectedTag;
+      const matchesText = name.toLowerCase().includes(searchTerm) || desc.toLowerCase().includes(searchTerm);
+      return matchesTag && matchesText;
+    });
+
+    grid.innerHTML = '';
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="no-results">Nenhuma indexação correspondente encontrada no banco de dados.</div>`;
+      return;
+    }
+
+    filtered.forEach((site, index) => {
+      const cardHTML = `
+        <article class="card" style="--category-color: var(--color-${site.tag})">
+          <div class="tag">${site.tag}</div>
+          <h3>${site.name}</h3>
+          <p>${site.desc}</p>
+          <a href="${site.url}" target="_blank" rel="noopener">
+            Acessar Módulo <span>→</span>
+          </a>
+        </article>
+      `;
+      grid.insertAdjacentHTML('beforeend', cardHTML);
+    });
+
+    // 3. ANIMAÇÃO DE ENTRADA (CASCATA)
+    const cards = grid.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('visible');
+      }, index * 60); // 60ms de atraso entre cada cartão
+    });
+  }
+
+  // 4. EVENTOS
+  searchInput.addEventListener('input', render);
+  filterSelect.addEventListener('change', render);
+
+  render();
+</script>
+
+</body>
+</html>
